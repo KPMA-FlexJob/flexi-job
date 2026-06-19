@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="fr" id="htmlRoot" class="lang-fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#C8262C">
+<title>Flexi-Job — Talents flexibles, entreprises agiles</title>
+<meta name="description" content="Flexi-Job connecte mamans actives et retraités expérimentés à des entreprises qui ont besoin de renfort flexible. Payez uniquement quand vous révélez un contact.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FFFFFF;
+    --panel:#FCEEED;
+    --panel-2:#FBDFDD;
+    --ink:#1A1A1A;
+    --ink-dim:#6B6B6B;
+    --red:#C8262C;
+    --red-dark:#8C1A1F;
+    --line:rgba(0,0,0,0.12);
+    --display:'Instrument Serif', Georgia, 'Times New Roman', serif;
+    --body:-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
+    --mono:'SF Mono','Roboto Mono',Consolas,'Courier New',monospace;
+    --radius:14px;
+  }
+
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:var(--body);
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  img,svg{max-width:100%;display:block;}
+  a{color:inherit;text-decoration:none;}
+  button{font-family:inherit;cursor:pointer;}
+
+  /* ---------- language toggle ---------- */
+  .lang-fr .en{display:none;}
+  .lang-en .fr{display:none;}
+
+  :focus-visible{outline:2px solid var(--red);outline-offset:3px;border-radius:4px;}
+
+  .wrap{max-width:1080px;margin:0 auto;padding:0 22px;}
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:12px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--red);
+    margin:0 0 10px;
+  }
+  h1,h2,h3{font-family:var(--display);font-weight:400;margin:0;color:var(--ink);}
+  h2{font-size:30px;line-height:1.15;}
+  p{margin:0;}
+
+  /* ---------- nav ---------- */
+  .site-nav{
+    position:sticky;top:0;z-index:40;
+    background:rgba(255,255,255,0.92);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .site-nav .wrap{
+    display:flex;align-items:center;justify-content:space-between;
+    height:60px;
+  }
+  .brand{font-family:var(--display);font-size:21px;letter-spacing:0.01em;color:var(--ink);}
+  .brand b{color:var(--red);font-style:italic;}
+  .nav-actions{display:flex;align-items:center;gap:10px;}
+  .lang-btn{
+    background:transparent;border:1px solid var(--line);color:var(--ink);
+    font-family:var(--mono);font-size:12px;letter-spacing:0.06em;
+    padding:7px 12px;border-radius:20px;
+  }
+  .lang-btn:hover{border-color:var(--red);color:var(--red);}
+  .nav-cta{
+    background:var(--red);color:#FFFFFF;
+    font-size:13px;font-weight:600;padding:8px 16px;border-radius:20px;
+    border:none;white-space:nowrap;
+  }
+  .nav-cta:hover{background:var(--red-dark);}
+
+  /* ---------- hero ---------- */
+  .hero{padding:56px 0 64px;}
+  .hero .wrap{display:flex;flex-direction:column;gap:40px;}
+  .hero-copy{animation:riseIn 0.7s ease both;}
+  .hero h1{font-size:38px;line-height:1.12;margin-bottom:18px;}
+  .hero h1 i{color:var(--red);font-style:italic;}
+  .hero p.lead{font-size:17px;color:var(--ink-dim);max-width:540px;margin-bottom:26px;}
+  .hero-ctas{display:flex;flex-wrap:wrap;gap:12px;}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:13px 22px;border-radius:10px;font-size:15px;font-weight:600;
+    border:1px solid transparent;
+  }
+  .btn-primary{background:var(--red);color:#FFFFFF;}
+  .btn-primary:hover{background:var(--red-dark);}
+  .btn-ghost{border:1px solid var(--red);color:var(--red);}
+  .btn-ghost:hover{background:var(--panel);}
+
+  /* ---------- reveal demo (signature element) ---------- */
+  .reveal-demo{display:flex;justify-content:center;animation:riseIn 0.8s ease 0.15s both;}
+  .demo-card{
+    width:100%;max-width:360px;
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:22px;
+  }
+  .demo-card-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;}
+  .demo-tag{font-family:var(--mono);font-size:11px;color:var(--red-dark);letter-spacing:0.08em;}
+  .demo-row{
+    display:flex;justify-content:space-between;gap:10px;
+    padding:10px 0;border-top:1px solid var(--line);
+    font-size:14px;
+  }
+  .demo-row:first-of-type{border-top:none;}
+  .demo-label{color:var(--ink-dim);}
+  .demo-value{font-family:var(--mono);font-weight:600;color:var(--ink);}
+  .demo-value.blurred{filter:blur(4px);transition:filter 0.4s ease;}
+  .demo-card.revealed .demo-value.blurred{filter:blur(0);color:var(--red-dark);}
+  .demo-reveal-btn{
+    width:100%;margin-top:16px;
+    background:#FFFFFF;border:1px solid var(--red);color:var(--red);
+    padding:11px;border-radius:8px;font-size:14px;font-weight:600;
+    transition:transform 0.25s ease;
+  }
+  .demo-reveal-btn:hover{transform:translateY(-1px);}
+  .demo-card.revealed .demo-reveal-btn{border-color:var(--red-dark);color:var(--red-dark);}
+  .demo-caption{margin-top:12px;font-size:12px;color:var(--ink-dim);text-align:center;font-style:italic;}
+
+  @keyframes riseIn{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+  @media (prefers-reduced-motion:reduce){
+    .hero-copy,.reveal-demo{animation:none;}
+    .demo-reveal-btn:hover{transform:none;}
+  }
+
+  /* ---------- generic section ---------- */
+  section{padding:54px 0;border-top:1px solid var(--line);}
+  .section-head{max-width:560px;margin-bottom:34px;}
+  .section-head h2{margin-top:4px;}
+
+  /* ---------- how it works ---------- */
+  .how-grid{display:grid;gap:28px;}
+  .how-col{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:24px;}
+  .how-col h3{font-size:19px;font-family:var(--body);font-weight:700;margin-bottom:18px;}
+  .step{display:flex;gap:14px;margin-bottom:16px;}
+  .step:last-child{margin-bottom:0;}
+  .step-num{font-family:var(--mono);color:var(--red);font-size:13px;flex-shrink:0;padding-top:2px;}
+  .step-text{font-size:14.5px;color:var(--ink-dim);}
+  .step-text b{color:var(--ink);font-weight:600;}
+
+  /* ---------- audiences ---------- */
+  .audience-grid{display:grid;gap:20px;}
+  .audience-card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:26px;}
+  .audience-card .ico{font-size:26px;margin-bottom:14px;}
+  .audience-card h3{font-size:19px;font-family:var(--body);font-weight:700;margin-bottom:10px;}
+  .audience-card p{font-size:14.5px;color:var(--ink-dim);}
+
+  /* ---------- reveal mechanism explainer ---------- */
+  .reveal-section .wrap{display:grid;gap:30px;}
+  .reveal-points{display:flex;flex-direction:column;gap:18px;margin-top:18px;}
+  .reveal-point{display:flex;gap:12px;}
+  .reveal-point .mark{color:var(--red);font-family:var(--mono);flex-shrink:0;}
+  .reveal-point p{font-size:14.5px;color:var(--ink-dim);}
+  .reveal-point b{color:var(--ink);}
+
+  /* ---------- pricing ---------- */
+  .pricing-single{display:flex;justify-content:center;}
+  .price-card{
+    background:var(--panel);border:1px solid var(--line);
+    border-radius:var(--radius);padding:30px;display:flex;flex-direction:column;
+    width:100%;max-width:400px;
+  }
+  .price-card.featured{border-color:var(--red);background:var(--panel-2);position:relative;}
+  .price-card.featured::before{
+    content:"★";
+    position:absolute;top:-12px;right:24px;
+    background:var(--red);color:#FFFFFF;
+    width:26px;height:26px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;font-size:13px;
+  }
+  .price-name{font-size:13px;text-transform:uppercase;letter-spacing:0.08em;color:var(--red-dark);font-family:var(--mono);margin-bottom:10px;}
+  .price-amount{font-family:var(--display);font-size:38px;margin-bottom:4px;color:var(--ink);}
+  .price-amount small{font-family:var(--body);font-size:13px;color:var(--ink-dim);font-style:normal;}
+  .price-card ul{list-style:none;margin:20px 0 24px;padding:0;flex-grow:1;}
+  .price-card li{
+    font-size:14px;color:var(--ink-dim);padding:9px 0;
+    border-top:1px solid var(--line);
+  }
+  .price-card li:first-child{border-top:none;}
+  .price-card li::before{content:"✓ ";color:var(--red);font-weight:700;}
+  .price-cta{
+    display:block;text-align:center;padding:12px;border-radius:8px;
+    font-size:14px;font-weight:600;border:1px solid var(--red);
+    background:var(--red);color:#FFFFFF;
+  }
+  .price-cta:hover{background:var(--red-dark);}
+
+  .pay-methods{
+    margin-top:30px;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:14px;
+    font-size:13px;color:var(--ink-dim);
+  }
+  .pay-badge{
+    font-family:var(--mono);font-size:12px;padding:6px 12px;border-radius:20px;
+    border:1px solid var(--red);color:var(--red-dark);background:#FFFFFF;
+  }
+
+  /* ---------- final cta ---------- */
+  .final-cta{text-align:center;}
+  .final-cta h2{font-size:28px;max-width:520px;margin:0 auto 14px;}
+  .final-cta p{color:var(--ink-dim);max-width:480px;margin:0 auto 26px;}
+  .final-ctas{display:flex;justify-content:center;flex-wrap:wrap;gap:12px;}
+
+  /* ---------- footer ---------- */
+  .site-footer{padding:34px 0 44px;border-top:1px solid var(--line);}
+  .site-footer .wrap{
+    display:flex;flex-direction:column;gap:14px;
+    font-size:13px;color:var(--ink-dim);
+  }
+  .footer-top{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;}
+  .footer-brand{font-family:var(--display);font-size:18px;color:var(--ink);}
+
+  /* ---------- desktop ---------- */
+  @media (min-width:760px){
+    h2{font-size:36px;}
+    .hero{padding:80px 0 90px;}
+    .hero .wrap{flex-direction:row;align-items:center;gap:56px;}
+    .hero-copy{flex:1.1;}
+    .hero h1{font-size:46px;}
+    .reveal-demo{flex:1;}
+    .how-grid{grid-template-columns:1fr 1fr;}
+    .audience-grid{grid-template-columns:1fr 1fr;}
+    .reveal-section .wrap{grid-template-columns:1fr 1fr;align-items:start;}
+    .final-cta h2{font-size:34px;}
+  }
+</style>
+</head>
+<body class="lang-fr">
+
+<header class="site-nav">
+  <div class="wrap">
+    <div class="brand"><b>Flexi</b>-Job</div>
+    <div class="nav-actions">
+      <button class="lang-btn" id="langToggle" type="button" aria-label="Changer de langue / Switch language">
+        <span class="fr">EN</span><span class="en">FR</span>
+      </button>
+      <a class="nav-cta" href="#tarifs">
+        <span class="fr">Recruter</span><span class="en">Hire</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-copy">
+        <h1>
+          <span class="fr">Le talent existe. Le bon <i>créneau</i> aussi.</span>
+          <span class="en">The talent exists. So does the right <i>moment</i>.</span>
+        </h1>
+        <p class="lead">
+          <span class="fr">Flexi-Job connecte mamans actives et retraités expérimentés à des entreprises qui ont besoin de renfort ponctuel — sans les lourdeurs du recrutement classique.</span>
+          <span class="en">Flexi-Job connects active mothers and experienced retirees with businesses that need flexible support — without the weight of traditional hiring.</span>
+        </p>
+        <div class="hero-ctas">
+          <a class="btn btn-primary" href="#candidat">
+            <span class="fr">Je suis disponible →</span><span class="en">I'm available →</span>
+          </a>
+          <a class="btn btn-ghost" href="#tarifs">
+            <span class="fr">Je veux recruter →</span><span class="en">I want to hire →</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="reveal-demo">
+        <div class="demo-card" id="demoCard">
+          <div class="demo-card-head">
+            <span class="demo-tag fr">PROFIL CANDIDAT</span>
+            <span class="demo-tag en">CANDIDATE PROFILE</span>
+            <span class="demo-tag" style="color:var(--ink-dim)">●●●●</span>
+          </div>
+          <div class="demo-row">
+            <span class="demo-label"><span class="fr">Disponibilité</span><span class="en">Availability</span></span>
+            <span class="demo-value">Lun–Ven · 8h–13h</span>
+          </div>
+          <div class="demo-row">
+            <span class="demo-label"><span class="fr">Zone</span><span class="en">Area</span></span>
+            <span class="demo-value">Etoug-Ebe, Yaoundé</span>
+          </div>
+          <div class="demo-row">
+            <span class="demo-label"><span class="fr">Profil</span><span class="en">Profile</span></span>
+            <span class="demo-value"><span class="fr">Maman active</span><span class="en">Active mother</span></span>
+          </div>
+          <div class="demo-row">
+            <span class="demo-label"><span class="fr">Contact</span><span class="en">Contact</span></span>
+            <span class="demo-value blurred">+237 6•• •• •• ••</span>
+          </div>
+          <button class="demo-reveal-btn" id="demoRevealBtn" type="button">
+            <span class="fr">🔒 Révéler le contact</span><span class="en">🔒 Reveal contact</span>
+          </button>
+          <p class="demo-caption">
+            <span class="fr">Exemple — profil fictif</span><span class="en">Example — fictional profile</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section id="comment">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow"><span class="fr">Processus</span><span class="en">Process</span></p>
+        <h2><span class="fr">Comment ça marche</span><span class="en">How it works</span></h2>
+      </div>
+      <div class="how-grid">
+        <div class="how-col">
+          <h3><span class="fr">Pour les talents flexibles</span><span class="en">For flexible talent</span></h3>
+          <div class="step">
+            <span class="step-num">01</span>
+            <p class="step-text">
+              <span class="fr"><b>Inscription</b> — crée ton profil : disponibilités, compétences, zone.</span>
+              <span class="en"><b>Sign up</b> — build your profile: availability, skills, area.</span>
+            </p>
+          </div>
+          <div class="step">
+            <span class="step-num">02</span>
+            <p class="step-text">
+              <span class="fr"><b>Visibilité</b> — les entreprises consultent ton profil, anonymisé.</span>
+              <span class="en"><b>Visibility</b> — businesses browse your profile, kept anonymous.</span>
+            </p>
+          </div>
+          <div class="step">
+            <span class="step-num">03</span>
+            <p class="step-text">
+              <span class="fr"><b>Mise en relation</b> — si ça matche, tes coordonnées sont partagées et tu es contacté(e).</span>
+              <span class="en"><b>Connection</b> — if it's a match, your contact is shared and you get contacted.</span>
+            </p>
+          </div>
+        </div>
+        <div class="how-col">
+          <h3><span class="fr">Pour les entreprises</span><span class="en">For businesses</span></h3>
+          <div class="step">
+            <span class="step-num">01</span>
+            <p class="step-text">
+              <span class="fr"><b>Parcourir</b> — consultez les profils disponibles selon vos besoins, gratuitement.</span>
+              <span class="en"><b>Browse</b> — review available profiles that match your needs, for free.</span>
+            </p>
+          </div>
+          <div class="step">
+            <span class="step-num">02</span>
+            <p class="step-text">
+              <span class="fr"><b>Révéler</b> — payez uniquement pour débloquer les coordonnées du profil qui vous intéresse.</span>
+              <span class="en"><b>Reveal</b> — pay only to unlock the contact details of the profile you like.</span>
+            </p>
+          </div>
+          <div class="step">
+            <span class="step-num">03</span>
+            <p class="step-text">
+              <span class="fr"><b>Contacter</b> — échangez directement, sans intermédiaire caché.</span>
+              <span class="en"><b>Contact</b> — talk directly, with no hidden middleman.</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AUDIENCES -->
+  <section id="candidat">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow"><span class="fr">Public</span><span class="en">Who it's for</span></p>
+        <h2><span class="fr">Pour qui ?</span><span class="en">Who is this for?</span></h2>
+      </div>
+      <div class="audience-grid">
+        <div class="audience-card">
+          <div class="ico">👩‍👧</div>
+          <h3><span class="fr">Mamans actives</span><span class="en">Active mothers</span></h3>
+          <p>
+            <span class="fr">Du travail qui se range autour de l'école, pas l'inverse. Des missions ponctuelles, sur des horaires que tu choisis.</span>
+            <span class="en">Work that fits around school hours, not the other way round. Flexible assignments, on hours you choose.</span>
+          </p>
+        </div>
+        <div class="audience-card">
+          <div class="ico">🧑‍🦳</div>
+          <h3><span class="fr">Retraités expérimentés</span><span class="en">Experienced retirees</span></h3>
+          <p>
+            <span class="fr">Des décennies d'expérience qui restent utiles. Des missions à temps partiel, à ton rythme.</span>
+            <span class="en">Decades of experience that still matter. Part-time work, at your own pace.</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REVEAL MECHANISM -->
+  <section class="reveal-section">
+    <div class="wrap">
+      <div>
+        <p class="eyebrow"><span class="fr">Mécanisme</span><span class="en">Mechanism</span></p>
+        <h2><span class="fr">Pourquoi payer pour révéler ?</span><span class="en">Why pay to reveal?</span></h2>
+      </div>
+      <div class="reveal-points">
+        <div class="reveal-point">
+          <span class="mark">→</span>
+          <p><span class="fr"><b>Ça protège les candidats</b> — pas de démarchage ni de spam, seules les entreprises qui paient pour révéler un profil peuvent contacter quelqu'un.</span>
+          <span class="en"><b>It protects candidates</b> — no spam or cold outreach, only businesses who pay to reveal a profile can make contact.</span></p>
+        </div>
+        <div class="reveal-point">
+          <span class="mark">→</span>
+          <p><span class="fr"><b>Ça filtre les recruteurs sérieux</b> — un acte d'engagement simple, qui écarte les demandes peu sérieuses.</span>
+          <span class="en"><b>It filters serious recruiters</b> — one simple act of commitment that screens out low-intent requests.</span></p>
+        </div>
+        <div class="reveal-point">
+          <span class="mark">→</span>
+          <p><span class="fr"><b>Ça reste transparent</b> — pas d'abonnement, pas d'engagement : vous payez seulement quand vous révélez un contact.</span>
+          <span class="en"><b>It stays transparent</b> — no subscription, no commitment: you only pay when you reveal a contact.</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section id="tarifs">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow"><span class="fr">Tarifs</span><span class="en">Pricing</span></p>
+        <h2><span class="fr">Un prix simple : à la révélation</span><span class="en">One simple price: pay per reveal</span></h2>
+      </div>
+
+      <div class="pricing-single">
+        <div class="price-card featured">
+          <p class="price-name">Pay-to-Reveal</p>
+          <p class="price-amount">2 000 <small>FCFA / <span class="fr">révélation</span><span class="en">reveal</span></small></p>
+          <ul>
+            <li><span class="fr">Parcourez tous les profils anonymisés gratuitement</span><span class="en">Browse all anonymized profiles for free</span></li>
+            <li><span class="fr">Aucun abonnement, aucun engagement</span><span class="en">No subscription, no commitment</span></li>
+            <li><span class="fr">Vous payez uniquement quand vous révélez un contact</span><span class="en">You only pay when you reveal a contact</span></li>
+          </ul>
+          <a class="price-cta" href="#contact"><span class="fr">Commencer à parcourir</span><span class="en">Start browsing</span></a>
+        </div>
+      </div>
+
+      <div class="pay-methods">
+        <span><span class="fr">Paiement accepté :</span><span class="en">Payment accepted:</span></span>
+        <span class="pay-badge">MTN MoMo</span>
+        <span class="pay-badge">Orange Money</span>
+        <span style="font-size:12px;">
+          <span class="fr">— traité de façon sécurisée via Notchpay</span>
+          <span class="en">— securely processed via Notchpay</span>
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="final-cta" id="contact">
+    <div class="wrap">
+      <h2><span class="fr">Prêt à commencer ?</span><span class="en">Ready to start?</span></h2>
+      <p>
+        <span class="fr">Que tu cherches une mission flexible ou du renfort pour ton entreprise, contacte-nous directement sur WhatsApp.</span>
+        <span class="en">Whether you're looking for flexible work or support for your business, reach us directly on WhatsApp.</span>
+      </p>
+      <div class="final-ctas">
+        <a class="btn btn-primary" href="https://wa.me/237000000000" target="_blank" rel="noopener">
+          <span class="fr">📱 Contacter sur WhatsApp</span><span class="en">📱 Contact on WhatsApp</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-top">
+      <span class="footer-brand"><b style="color:var(--red);font-style:italic;">Flexi</b>-Job</span>
+      <button class="lang-btn" id="langToggleFooter" type="button" aria-label="Changer de langue / Switch language">
+        <span class="fr">English</span><span class="en">Français</span>
+      </button>
+    </div>
+    <p>
+      <span class="fr">Le travail flexible, organisé sérieusement.</span>
+      <span class="en">Flexible work, organized seriously.</span>
+      &nbsp;© <span id="year"></span> Flexi-Job.
+    </p>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    var root = document.getElementById('htmlRoot');
+    function setLang(lang){
+      root.classList.remove('lang-fr','lang-en');
+      root.classList.add('lang-' + lang);
+      root.setAttribute('lang', lang);
+    }
+    function toggleLang(){
+      setLang(root.classList.contains('lang-fr') ? 'en' : 'fr');
+    }
+    document.getElementById('langToggle').addEventListener('click', toggleLang);
+    document.getElementById('langToggleFooter').addEventListener('click', toggleLang);
+
+    var demoCard = document.getElementById('demoCard');
+    var demoBtn = document.getElementById('demoRevealBtn');
+    demoBtn.addEventListener('click', function(){
+      var revealed = demoCard.classList.toggle('revealed');
+      var valueEl = demoCard.querySelector('.demo-value.blurred');
+      if(revealed){
+        valueEl.textContent = '+237 690 12 34 56';
+      } else {
+        valueEl.textContent = '+237 6•• •• •• ••';
+      }
+    });
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+  })();
+</script>
+
+</body>
+</html>
